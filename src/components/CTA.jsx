@@ -1,9 +1,30 @@
+import { motion } from 'framer-motion'
+
 export default function CTA() {
   return (
     <section id="contact" className="relative py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-blue-600/30 to-cyan-500/20 p-10 backdrop-blur">
-          <div className="max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="rounded-3xl border border-white/10 bg-gradient-to-br from-blue-600/30 to-cyan-500/20 p-10 backdrop-blur relative overflow-hidden"
+        >
+          <motion.div
+            aria-hidden
+            className="absolute -right-10 -top-10 h-56 w-56 rounded-full bg-cyan-400/20 blur-2xl"
+            animate={{ y: [0, -16, 0], x: [0, 12, 0] }}
+            transition={{ duration: 5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+          />
+          <motion.div
+            aria-hidden
+            className="absolute -left-10 -bottom-10 h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl"
+            animate={{ y: [0, 16, 0], x: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+          />
+
+          <div className="max-w-2xl relative">
             <h2 className="text-3xl sm:text-4xl font-bold text-white">Let’s build something remarkable</h2>
             <p className="mt-3 text-slate-200">Tell us about your goals and we’ll craft a tailored path to get you there.</p>
 
@@ -17,9 +38,8 @@ export default function CTA() {
               </button>
             </form>
           </div>
-        </div>
+        </motion.div>
       </div>
-      <div className="pointer-events-none absolute inset-x-0 -z-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
     </section>
   )
 }

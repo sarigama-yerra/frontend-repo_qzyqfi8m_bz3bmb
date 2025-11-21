@@ -1,4 +1,5 @@
 import { CheckCircle2, Workflow, Gauge, Users } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const steps = [
   { icon: Users, title: 'Discover', desc: 'Workshops to align on goals, constraints, and success metrics.' },
@@ -18,18 +19,25 @@ export default function Process() {
 
         <ol className="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map(({ icon: Icon, title, desc }, idx) => (
-            <li key={title} className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <motion.li
+              key={title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: idx * 0.06 }}
+              className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur hover:bg-white/10 transition-colors"
+            >
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/80 to-cyan-400/80 text-white shadow">
                 <Icon className="h-6 w-6" />
               </div>
               <p className="text-xs text-slate-300/70">Step {idx + 1}</p>
               <h3 className="text-lg font-semibold text-white">{title}</h3>
               <p className="mt-2 text-sm text-slate-300">{desc}</p>
-            </li>
+            </motion.li>
           ))}
         </ol>
       </div>
-      <div className="pointer-events-none absolute inset-x-0 -z-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <motion.div aria-hidden className="pointer-events-none absolute inset-x-0 -z-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} />
     </section>
   )
 }
